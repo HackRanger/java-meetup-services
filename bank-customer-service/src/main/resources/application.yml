@@ -1,9 +1,11 @@
 server: 
-  port: 9000
+  port: 8080
+topic:
+  newcustomer: newcustomer
 spring:   
    kafka:        
      bootstrap-servers: 
-        -  kafkaserver:9092
+        -  :9092
      properties:
         security.protocol: PLAINTEXT            
      consumer:
@@ -14,4 +16,3 @@ spring:
      producer:      
         key-serializer: org.apache.kafka.common.serialization.StringSerializer
         value-serializer: org.apache.kafka.common.serialization.StringSerializer
-

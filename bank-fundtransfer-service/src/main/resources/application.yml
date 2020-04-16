@@ -1,0 +1,18 @@
+server: 
+  port: 8181
+topic:
+  transaction: transaction
+spring:   
+   kafka:        
+     bootstrap-servers: 
+        -  :9092
+     properties:
+        security.protocol: PLAINTEXT            
+     consumer:
+        group-id: streamingclient-grp
+        auto-offset-reset: latest
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value-deserializer: org.apache.kafka.common.serialization.StringDeserializer     
+     producer:      
+        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+        value-serializer: org.apache.kafka.common.serialization.StringSerializer

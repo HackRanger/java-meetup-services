@@ -1,36 +1,31 @@
 package com.simplebank.controller;
 
+import com.simplebank.dto.CustomerDto;
 import com.simplebank.service.KafkaProducer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 
-
 @RestController
 @RequestMapping("customer")
-@Api(value="Customer controller", description="",tags = {"Customer"})
+@Api(value = "Customer controller", description = "This is customer service endpoint", tags = { "Customer" })
 public class Customer {
-	   private final KafkaProducer producer;
+	@Autowired
+	private KafkaProducer producer;
 
-	    @Autowired
-	    Customer(KafkaProducer producer) {
-	        this.producer = producer;
-	    }
-		
-		@GetMapping
-		public String getMessage(){
-			
-			return "Hello World!";
+	@Value("${topic.newcustomer}")
+	private String newCustomerTopic;
 
-		}
-		
-		@PostMapping
-		public void sendMessage(@RequestBody String msg) {
-			this.producer.sendMessage("mytopic",msg);
-		}
+	@PostMapping("/{customerNumber}")
+	public void createCustomer(@PathVariable("customerNumber") String customerNumber,
+			@RequestBody CustomerDto customer) {
+		this.producer.sendMessage(newCustomerTopic, customerNumber, customer.toString());
+	}
 
 }
