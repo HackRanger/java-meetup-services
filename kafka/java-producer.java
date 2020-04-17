@@ -1,5 +1,3 @@
-package com.scania.kafka.ssl;
-
 import org.apache.kafka.common.config.SslConfigs;
 
 import java.util.Properties;
@@ -17,7 +15,7 @@ public class SSLKafkaProducerDemo
     properties.setProperty("bootstrap.servers", kafkaBrokers);
     properties.setProperty("key.serializer", org.apache.kafka.common.serialization.StringSerializer.class.getName());
     properties.setProperty("value.serializer", org.apache.kafka.common.serialization.StringSerializer.class.getName());
-    properties.setProperty("security.protocol", "SASL_SSL");
+    properties.setProperty("security.protocol", "PLAINTEXT");
 
 
     org.apache.kafka.clients.producer.Producer<String, String> producer = new org.apache.kafka.clients.producer.KafkaProducer(properties);
