@@ -1,4 +1,3 @@
-package com.scania.kafka.ssl;
 
 import java.util.Properties;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -16,7 +15,7 @@ public class SSLKafkaConsumerDemo
     properties.setProperty("bootstrap.servers", kafkaBrokers);
     properties.setProperty("key.deserializer", org.apache.kafka.common.serialization.StringDeserializer.class.getName());
     properties.setProperty("value.deserializer", org.apache.kafka.common.serialization.StringDeserializer.class.getName());
-    properties.setProperty("security.protocol", "SASL_SSL");
+    properties.setProperty("security.protocol", "PLAINTEXT");
     properties.setProperty("auto.offset.reset", "latest");
     
     org.apache.kafka.clients.consumer.KafkaConsumer<String, String> kafkaConsumer = new org.apache.kafka.clients.consumer.KafkaConsumer(properties);
