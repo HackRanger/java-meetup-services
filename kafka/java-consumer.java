@@ -17,15 +17,6 @@ public class SSLKafkaConsumerDemo
     properties.setProperty("key.deserializer", org.apache.kafka.common.serialization.StringDeserializer.class.getName());
     properties.setProperty("value.deserializer", org.apache.kafka.common.serialization.StringDeserializer.class.getName());
     properties.setProperty("security.protocol", "SASL_SSL");
-    properties.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, "C:\\Streaming\\server.truststore.jks");
-    properties.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG,  "Welcome@123");
-//    properties.setProperty("security.protocol", "SSL"); //AWS
-//    properties.put(SslConfigs.SSL_KEYSTORE_LOCATION_CONFIG, "C:\\Streaming\\mm-devtest.jks"); //AWS
-//    properties.put(SslConfigs.SSL_KEYSTORE_PASSWORD_CONFIG,  "Welcome@123"); //AWS
-    properties.setProperty("sasl.kerberos.service.name", "kafka");
-    properties.setProperty("group.id", "test-123");
-    properties.setProperty("enable.auto.commit", "false");
-    
     properties.setProperty("auto.offset.reset", "latest");
     
     org.apache.kafka.clients.consumer.KafkaConsumer<String, String> kafkaConsumer = new org.apache.kafka.clients.consumer.KafkaConsumer(properties);
